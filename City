@@ -1,4 +1,4 @@
-# загрузил актуальную базу нестандартных активов (обезличена)
+# education
 cities = pd.read_csv(r"C:\Users\ShakirovMK\Downloads\Eduction\na7.csv", sep=';')
 
 def to_int_price(value):
