@@ -1,0 +1,35 @@
+# загрузил актуальную базу нестандартных активов (обезличена)
+cities = pd.read_csv(r"C:\Users\ShakirovMK\Downloads\Eduction\na7.csv", sep=';')
+
+def to_int_price(value):
+    try:
+        return int(value)
+    except:
+        return None
+
+cities['price'] = cities['price'].map(to_int_price)
+cities = cities[['geo_lat', 'geo_lon', 'price']].dropna()
+
+fig = go.Figure(go.Scattermapbox(lat=cities['geo_lat'], 
+                                 lon=cities['geo_lon'], 
+                                 text=cities['price'],
+                                 marker=dict(colorbar=dict(title="Стоимость НА, руб."),
+                                             color=cities['price'],
+                                             size=cities['price'].map(to_int_size))))
+map_center = go.layout.mapbox.Center(lat=(cities['geo_lat'].max()+cities['geo_lat'].min())/2, 
+                                     lon=(cities['geo_lon'].max()+cities['geo_lon'].min())/2)
+fig.update_layout(mapbox_style="open-street-map",
+                  mapbox=dict(center=map_center, zoom=2))
+fig.show()
+
+fig = go.Figure(go.Scattermapbox(lat=cities['geo_lat'], 
+                                 lon=cities['geo_lon'], 
+                                 text=cities['price'],
+                                 marker=dict(colorbar=dict(title="Стоимость НА, руб."),
+                                             color=cities['price'],
+                                             size=cities['price'].map(to_int_size))))
+map_center = go.layout.mapbox.Center(lat=(cities['geo_lat'].max()+cities['geo_lat'].min())/2, 
+                                     lon=(cities['geo_lon'].max()+cities['geo_lon'].min())/2)
+fig.update_layout(mapbox_style="open-street-map",
+                  mapbox=dict(center=map_center, zoom=2))
+fig.show()
